@@ -3,28 +3,31 @@ db_schema:
   logbook:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: date_start
       type: date
-    - admin_ui: {order: 1, width: 200}
+    - admin_ui: {width: 200}
       name: date_end
       type: date
-    - admin_ui: {order: 2, width: 200}
+    - admin_ui: {width: 200}
       name: odometer_start
       type: number
-    - admin_ui: {order: 3, width: 200}
+    - admin_ui: {width: 200}
       name: odometer_end
       type: number
-    - admin_ui: {order: 4, width: 200}
+    - admin_ui: {width: 200}
       name: usage_type
       target: usage_type
-      type: link_multiple
+      type: link_single
+    - admin_ui: {order: 5, width: 200}
+      name: total_distance
+      type: number
     server: full
     title: logbook
   usage_type:
     client: none
     columns:
-    - admin_ui: {order: 0, width: 200}
+    - admin_ui: {width: 200}
       name: usage_type
       type: string
     server: full
