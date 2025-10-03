@@ -1,3 +1,9 @@
 .anvil-role-square-button {
 border-radius: 0px
   }
+
+.anvil-DatePicker input::placeholder {
+  color: red;    /* your desired color */
+  opacity: 1; 
+  
+}

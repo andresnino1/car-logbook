@@ -9,6 +9,5 @@ class Logbook(LogbookTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
-    self.button_send.role = None
-    self.button_send.appearance 
+
     
