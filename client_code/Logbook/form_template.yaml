@@ -27,7 +27,7 @@ components_by_slot:
         font_size: 20
         icon: mi:arrow_forward
         icon_size: 26
-        role: null
+        role: square-button
         spacing:
           margin: ['8', null, null, null]
           padding: [null, null, null, '24']

@@ -48,7 +48,7 @@ color_scheme:
   - {color: 'rgba(239,241,241, 0.12)', name: Inverse On Surface Overlay 2}
   preset_groups: []
 roles:
-- components: [Button]
-  display_in_toolbox: true
+- components: [m3._Components.Button]
+  display_in_toolbox: false
   name: square-button
   title: squarebutton
