@@ -10,4 +10,22 @@ class Logbook(LogbookTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
 
-    
+
+  # # ================ DropDown Machine Type Show Function ==================
+
+  # def dropdown_machine_type_show(self, **event_args):
+  #   """This method is called when the DropDown is shown on the screen"""
+  #   self.dropdown_machine_type.items = [(r["model"],r) for r in app_tables.machine_type.search()]
+  #   self.dropdown_machine_type.include_placeholder=True
+  #   self.dropdown_machine_type.placeholder="Select a Machine Model"
+
+
+
+  def dropdown_usage_type_show(self, **event_args):
+    """This method is called when the component is shown on the screen."""
+    self.dropdown_usage_type.items = [(r["usage_type"],r) for r in app_tables.usage_type.search()]
+    self.dropdown_usage_type.include_placeholder=True
+    self.dropdown_usage_type.placeholder="Select Usage Type"
+
+
+

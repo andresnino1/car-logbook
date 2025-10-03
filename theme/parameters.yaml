@@ -14,10 +14,10 @@ color_scheme:
   - {color: '#0F1A37', name: On Tertiary Container}
   - {color: '#BA1A1A', name: Error}
   - {color: '#FBFCFD', name: Background}
-  - {color: '#F8FAFA', name: Surface}
+  - {color: '#FFFFFF', name: Surface}
   - {color: '#191C1D', name: On Background}
   - {color: '#191C1D', name: On Surface}
-  - {color: '#DBE4E6', name: Surface Variant}
+  - {color: '#FFFFFF', name: Surface Variant}
   - {color: '#3F484A', name: On Surface Variant}
   - {color: '#6F797A', name: Outline}
   - {color: 'rgba(25, 28, 29, 0.38)', name: On Disabled}
@@ -27,7 +27,7 @@ color_scheme:
   - {color: 'rgba(3, 31, 35, 0.08)', name: Dark Overlay 1}
   - {color: 'rgba(3, 31, 35, 0.12)', name: Dark Overlay 2}
   - {color: 'rgba(0, 104, 116, 0.05)', name: Primary Overlay 1}
-  - {color: 'rgba(0, 104, 116, 0.08)', name: Primary Overlay 2}
+  - {color: '#FBFCFD', name: Primary Overlay 2}
   - {color: 'rgba(0, 104, 116, 0.11)', name: Primary Overlay 3}
   - {color: '#BFC8CA', name: Outline Variant}
   - {color: '#FFFFFF', name: On Error}
@@ -52,3 +52,7 @@ roles:
   display_in_toolbox: false
   name: square-button
   title: squarebutton
+- components: [m3._Components.DropdownMenu]
+  name: dropdowntextsize
+- components: [m3._Components.DropdownMenu]
+  name: dropdownplaceholder

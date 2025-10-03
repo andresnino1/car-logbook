@@ -3,5 +3,14 @@ border-radius: 0px
   }
 
 .anvil-m3-navigation-rail{
-  display: None
+ display: none;
+
+}
+
+.anvil-role-dropdowntextsize{
+ font-size: 20px;
+}
+
+.anvil-role-dropdownplaceholder input::placeholder{
+  color: red;
 }

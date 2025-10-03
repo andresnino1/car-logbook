@@ -25,7 +25,7 @@ db_schema:
     server: full
     title: logbook
   usage_type:
-    client: none
+    client: search
     columns:
     - admin_ui: {width: 200}
       name: usage_type
