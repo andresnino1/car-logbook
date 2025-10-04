@@ -1,5 +1,7 @@
 .anvil-role-square-button {
-border-radius: 0px
+border-radius: 0px;
+padding-top: 1px; 
+  
   }
 
 .anvil-m3-navigation-rail{
