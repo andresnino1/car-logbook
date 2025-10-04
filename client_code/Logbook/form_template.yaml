@@ -7,14 +7,15 @@ components_by_slot:
   - components:
     - data_bindings: []
       layout_properties: {grid_position: 'TKPDDH,UWSIIO', row_background: ''}
-      name: date_picker_1
+      name: date_picker_trip
       properties: {bold: false, font_size: 20, format: ' %d/%m/%Y', italic: false, pick_time: false, placeholder: Date, underline: false}
       type: DatePicker
-    - layout_properties: {full_width_row: false, grid_position: 'AAYWEP,UGYOHT'}
-      name: text_box_1
+    - event_bindings: {change: text_box_odometer_change}
+      layout_properties: {full_width_row: false, grid_position: 'AAYWEP,UGYOHT'}
+      name: text_box_odometer
       properties: {appearance: outlined, display_font_size: 20, label: Odometer, label_bold: false, label_color: '#b7b8b8', label_font_size: 20, placeholder: '', type: number}
       type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
-    - event_bindings: {show: dropdown_usage_type_show}
+    - event_bindings: {change: dropdown_usage_type_change, show: dropdown_usage_type_show}
       layout_properties: {grid_position: 'IBTPAU,FDKUNS'}
       name: dropdown_usage_type
       properties:
@@ -37,17 +38,18 @@ components_by_slot:
         name: personal_lable
         properties: {align: right, font_size: 30, icon_size: null, scale: medium, style: body, text: Personal Kmts}
         type: form:dep_lin1x4oec0ytd:_Components.Text
-      - layout_properties: {grid_position: 'NNVDEU,WHDPEZ'}
-        name: text_box_2
-        properties: {appearance: outlined}
+      - event_bindings: {change: text_box_personal_km_change}
+        layout_properties: {grid_position: 'NNVDEU,WHDPEZ'}
+        name: text_box_personal_km
+        properties: {appearance: outlined, display_font_size: 20, type: number}
         type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'RHHNNN,WDKRQA'}
         name: work_label
         properties: {align: right, font_size: 30, text: Work Kmts}
         type: form:dep_lin1x4oec0ytd:_Components.Text
       - layout_properties: {grid_position: 'RHHNNN,AELWET'}
-        name: text_box_3
-        properties: {appearance: outlined}
+        name: text_box_work_km
+        properties: {appearance: outlined, display_font_size: 20, type: number}
         type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
       layout_properties: {grid_position: 'VRLNIR,USOMRE'}
       name: column_panel_usage_type
@@ -60,14 +62,14 @@ components_by_slot:
         align: full
         appearance: filled
         enabled: true
-        font_size: 20
+        font_size: 28
         icon: mi:arrow_forward
         icon_size: 26
         role: square-button
         spacing:
           margin: ['8', null, null, null]
-          padding: [null, null, null, '24']
-        text: Send
+          padding: ['15', null, '15', '24']
+        text: SEND
         visible: true
       type: form:dep_lin1x4oec0ytd:_Components.Button
     layout_properties: {}
