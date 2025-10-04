@@ -47,7 +47,8 @@ components_by_slot:
         name: work_label
         properties: {align: right, font_size: 30, text: Work Kmts}
         type: form:dep_lin1x4oec0ytd:_Components.Text
-      - layout_properties: {grid_position: 'RHHNNN,AELWET'}
+      - event_bindings: {change: text_box_work_km_change}
+        layout_properties: {grid_position: 'RHHNNN,AELWET'}
         name: text_box_work_km
         properties: {appearance: outlined, display_font_size: 20, type: number}
         type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
@@ -56,6 +57,7 @@ components_by_slot:
       properties: {col_widths: '{"LUURKZ":30,"WHDPEZ":30}'}
       type: ColumnPanel
     - data_bindings: []
+      event_bindings: {click: button_send_click}
       layout_properties: {grid_position: 'KSGJYS,GIHAQA'}
       name: button_send
       properties:

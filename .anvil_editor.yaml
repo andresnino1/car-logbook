@@ -5,4 +5,5 @@ unique_ids:
     Logbook: '1759473130594225688785893.96713'
   modules: {}
   scripts: {}
-  server_modules: {}
+  server_modules:
+    log_register: '1759542255052317333452425.57074'
