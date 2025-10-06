@@ -6,6 +6,9 @@ import anvil.tables.query as q
 from anvil.tables import app_tables
 import m3.components as m3
 
+personal_km = ""
+work_km = ""
+
 class Logbook(LogbookTemplate):
   def __init__(self, **properties):
     # Set Form properties and Data Bindings.
@@ -25,11 +28,30 @@ class Logbook(LogbookTemplate):
 # FALTA EVALUAR cuando usage type se seleciona como personal
 # o como work y se debe guardar el valor completo del odometro en esas variales
  # cuando se oprima el boton de SEND 
+# falta evaluar cuando el odometro tiene valor negativo al cambiar. -- DONE
 
+  # Calculate Total Kms calling Server and show value in the main card
+  def total_km_value_show(self, **event_args):
+    total_kms=anvil.server.call('total_kms')
+    self.total_km_value.text = total_kms
+
+    alta evaluar cuando el odometro tiene valor negativo al cambiar
   # When odometer value change the personal km and work km is empty
   def text_box_odometer_change(self, **event_args):
-    self.text_box_personal_km.text = ""
-    self.text_box_work_km.text = ""
+    global personal_km
+    global work_km
+    personal_km = ""
+    work_km = ""
+    self.text_box_odometer.border_color="black"
+    self.text_box_personal_km.text = personal_km
+    self.text_box_work_km.text = work_km
+    odometer = self.text_box_odometer.text
+    if odometer == "":
+      self.text_box_odometer.border_color="red"
+    elif odometer < 0:
+      alert("Enter Just Positive Values")
+      
+    
     
   # Show usage type items in dropdown
   def dropdown_usage_type_show(self, **event_args):
@@ -39,34 +61,74 @@ class Logbook(LogbookTemplate):
 
   # Evaluate when dropdown is select Mix Usage Type1
   def dropdown_usage_type_change(self, **event_args):
+    global personal_km
+    global work_km
     usage_type_obj = self.dropdown_usage_type.selected_value
     usage_type = usage_type_obj['usage_type']
     if usage_type == 'Mix':
       self.column_panel_usage_type.visible=True
-    else:
+    if usage_type == "Personal":
+      personal_km = self.text_box_odometer.text
+      work_km = 0
+      self.column_panel_usage_type.visible=False
+    if usage_type == "Business":
+      personal_km = 0
+      work_km = self.text_box_odometer.text
       self.column_panel_usage_type.visible=False
   
   # evaluate when personal kms changes and calculate work kmts
   def text_box_personal_km_change(self, **event_args):
-    odometer = abs(self.text_box_odometer.text)
-    personal_km = abs(self.text_box_personal_km.text)
-    if personal_km > odometer:
+    global personal_km
+    global work_km
+    self.text_box_personal_km.border_color="black"
+    odometer = self.text_box_odometer.text
+    personal_km = self.text_box_personal_km.text
+    self.text_box_work_km.text = ""
+    if personal_km == "":
+      self.text_box_personal_km.border_color="red"
+    elif personal_km > odometer:
       alert("Check Odometer Value", title="Wrong Value")
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
+      personal_km = ""
+      work_km = ""
+    elif personal_km < 0:
+      alert("Enter Just Positive Values")
+      self.text_box_personal_km.text=""
+      self.text_box_work_km.text=""
+      personal_km = ""
+      work_km = ""
     else:
-      self.text_box_work_km.text = odometer - personal_km
+      work_km = odometer - personal_km
+      self.text_box_work_km.text = work_km
+      
 
   # evaluate when Work kms change and calculate personal kms
   def text_box_work_km_change(self, **event_args):
-    odometer = abs(self.text_box_odometer.text)
-    work_km = abs(self.text_box_work_km.text)
-    if work_km > odometer:
+    global personal_km
+    global work_km
+    self.text_box_work_km.border_color="black"
+    odometer = self.text_box_odometer.text
+    work_km = self.text_box_work_km.text
+    self.text_box_personal_km.text = ""
+
+    if work_km == "":
+      self.text_box_work_km.border_color="red"
+    elif work_km > odometer:
       alert("Check Odometer Value", title="Wrong Value")
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
+      personal_km = ""
+      work_km = ""
+    elif work_km < 0:
+      alert("Enter Just Positive Values")
+      self.text_box_personal_km.text=""
+      self.text_box_work_km.text=""
+      personal_km = ""
+      work_km = ""
     else:
-      self.text_box_personal_km.text = odometer - work_km
+      personal_km = odometer - work_km
+      self.text_box_personal_km.text = personal_km
 
   # Send Button - add register to database
   def button_send_click(self, **event_args):
@@ -74,8 +136,8 @@ class Logbook(LogbookTemplate):
     date=self.date_picker_trip.date
     odometer = self.text_box_odometer.text
     usage_type_obj = self.dropdown_usage_type.selected_value
-    personal_km = self.text_box_personal_km.text
-    work_km = self.text_box_work_km.text
+    global personal_km
+    global work_km 
     
     if date is None:
       alert("Choose a Date")
@@ -96,10 +158,8 @@ class Logbook(LogbookTemplate):
       date_format = date.strftime("%d/%m/%Y")
       print(date_format, odometer,personal_km,work_km)
 
-  def total_km_value_show(self, **event_args):
-    """This method is called when the component is shown on the screen."""
-    total_kms=anvil.server.call('total_kms')
-    self.total_km_value.text = total_kms
+ 
+  
 
  
 

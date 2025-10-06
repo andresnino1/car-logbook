@@ -34,7 +34,7 @@ components_by_slot:
       name: date_picker_trip
       properties: {bold: false, font_size: 20, format: ' %d/%m/%Y', italic: false, pick_time: false, placeholder: Date, underline: false}
       type: DatePicker
-    - event_bindings: {change: text_box_odometer_change}
+    - event_bindings: {change: text_box_odometer_change, pressed_enter: text_box_odometer_pressed_enter}
       layout_properties: {full_width_row: false, grid_position: 'AAYWEP,UGYOHT'}
       name: text_box_odometer
       properties: {appearance: outlined, display_font_size: 20, label: Odometer, label_bold: false, label_color: '#b7b8b8', label_font_size: 20, placeholder: '', type: number}
@@ -65,7 +65,7 @@ components_by_slot:
       - event_bindings: {change: text_box_personal_km_change}
         layout_properties: {grid_position: 'NNVDEU,WHDPEZ'}
         name: text_box_personal_km
-        properties: {appearance: outlined, display_font_size: 20, type: number}
+        properties: {appearance: outlined, border_color: '', display_font_size: 20, type: number}
         type: form:dep_lin1x4oec0ytd:_Components.TextInput.TextBox
       - layout_properties: {grid_position: 'RHHNNN,WDKRQA'}
         name: work_label
