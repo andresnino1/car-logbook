@@ -17,3 +17,8 @@ import anvil.server
 @anvil.server.callable
 def register_trip(date, odometer, personal, work):
   pass
+  
+@anvil.server.callable
+def total_kms():
+  total_kms = sum(row['total_distance'] for row in app_tables.logbook.search())
+  return total_kms

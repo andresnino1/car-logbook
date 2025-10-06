@@ -96,4 +96,10 @@ class Logbook(LogbookTemplate):
       date_format = date.strftime("%d/%m/%Y")
       print(date_format, odometer,personal_km,work_km)
 
+  def total_km_value_show(self, **event_args):
+    """This method is called when the component is shown on the screen."""
+    total_kms=anvil.server.call('total_kms')
+    self.total_km_value.text = total_kms
+
+ 
 
