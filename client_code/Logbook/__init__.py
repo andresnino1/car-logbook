@@ -28,14 +28,13 @@ class Logbook(LogbookTemplate):
 # FALTA EVALUAR cuando usage type se seleciona como personal
 # o como work y se debe guardar el valor completo del odometro en esas variales
  # cuando se oprima el boton de SEND 
-# falta evaluar cuando el odometro tiene valor negativo al cambiar. -- DONE
+  # clear the form after submit
 
   # Calculate Total Kms calling Server and show value in the main card
   def total_km_value_show(self, **event_args):
     total_kms=anvil.server.call('total_kms')
     self.total_km_value.text = total_kms
 
-    alta evaluar cuando el odometro tiene valor negativo al cambiar
   # When odometer value change the personal km and work km is empty
   def text_box_odometer_change(self, **event_args):
     global personal_km
@@ -50,6 +49,9 @@ class Logbook(LogbookTemplate):
       self.text_box_odometer.border_color="red"
     elif odometer < 0:
       alert("Enter Just Positive Values")
+    else:
+      self.dropdown_usage_type.placeholder="Select Usage Type"
+
       
     
     
@@ -157,6 +159,8 @@ class Logbook(LogbookTemplate):
     else:
       date_format = date.strftime("%d/%m/%Y")
       print(date_format, odometer,personal_km,work_km)
+      personal_km = 0
+      work_km = 0
 
  
   

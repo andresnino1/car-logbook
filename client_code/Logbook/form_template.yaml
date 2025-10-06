@@ -34,7 +34,7 @@ components_by_slot:
       name: date_picker_trip
       properties: {bold: false, font_size: 20, format: ' %d/%m/%Y', italic: false, pick_time: false, placeholder: Date, underline: false}
       type: DatePicker
-    - event_bindings: {change: text_box_odometer_change, pressed_enter: text_box_odometer_pressed_enter}
+    - event_bindings: {change: text_box_odometer_change}
       layout_properties: {full_width_row: false, grid_position: 'AAYWEP,UGYOHT'}
       name: text_box_odometer
       properties: {appearance: outlined, display_font_size: 20, label: Odometer, label_bold: false, label_color: '#b7b8b8', label_font_size: 20, placeholder: '', type: number}
