@@ -25,10 +25,7 @@ class Logbook(LogbookTemplate):
   #   self.dropdown_machine_type.placeholder="Select a Machine Model"
 
 # ========= TODO ================
-# FALTA EVALUAR cuando usage type se seleciona como personal
-# o como work y se debe guardar el valor completo del odometro en esas variales
- # cuando se oprima el boton de SEND 
-  # clear the form after submit
+# cuando registre el odometro refrescar el valor suma total en total kms
 
   # Calculate Total Kms calling Server and show value in the main card
   def total_km_value_show(self, **event_args):
