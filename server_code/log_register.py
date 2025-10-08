@@ -15,7 +15,11 @@ import anvil.server
 #   print("Hello, " + name + "!")
 #   return 42
 @anvil.server.callable
-def register_trip(date, odometer, personal, work):
+def register_trip(date, odometer, usage_type, personal, work):
+  if usage_type=="Mix":
+    app_tables.logbook.add_row(date_end=date, odometer_end=odometer,usage_type=usage_type,total_distance=odometer)
+    
+  app_tables.logbook.add_row(date_end=date,odometer_end=odometer,usage_type=usage_type, )
   pass
   
 @anvil.server.callable

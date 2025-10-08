@@ -158,9 +158,15 @@ class Logbook(LogbookTemplate):
 
     else:
       date_format = date.strftime("%d/%m/%Y")
-      print(date_format, odometer,personal_km,work_km)
+      usage_type=usage_type_obj["usage_type"]
+      anvil.server.call('register_trip',date_format,odometer,usage_type, personal_km,work_km)
+      alert("Kmts Registered Successfully", title="Trip Registered")
       personal_km = 0
       work_km = 0
+      odometer = 0
+      self.text_box_odometer.text=""
+      self.text_box_personal_km.text=""
+      self.text_box_work_km.text=""
 
  
   
