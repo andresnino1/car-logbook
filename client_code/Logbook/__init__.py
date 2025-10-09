@@ -29,6 +29,7 @@ class Logbook(LogbookTemplate):
 
   # Calculate Total Kms calling Server and show value in the main card
   def total_km_value_show(self, **event_args):
+    global total_kms
     total_kms=anvil.server.call('total_kms')
     self.total_km_value.text = total_kms
 
@@ -42,12 +43,14 @@ class Logbook(LogbookTemplate):
     self.text_box_personal_km.text = personal_km
     self.text_box_work_km.text = work_km
     odometer = self.text_box_odometer.text
+    total_km = self.
     if odometer == "":
       self.text_box_odometer.border_color="red"
     elif odometer < 0:
       alert("Enter Just Positive Values")
-    else:
-      self.dropdown_usage_type.placeholder="Select Usage Type"
+    # elif odometer < total_km :
+    #   alert("Check Odometer Value")
+    #   # self.dropdown_usage_type.placeholder="Select Usage Type"
 
       
     
@@ -134,6 +137,7 @@ class Logbook(LogbookTemplate):
     """This method is called when the component is clicked."""
     date=self.date_picker_trip.date
     odometer = self.text_box_odometer.text
+    total_km = self.total_km_value.text
     usage_type_obj = self.dropdown_usage_type.selected_value
     global personal_km
     global work_km 
@@ -143,6 +147,9 @@ class Logbook(LogbookTemplate):
     
     elif odometer == "":
       alert("Enter Odometer Value")
+
+    elif odometer < total_km:
+      alert("Check Odometer Value")
 
     elif usage_type_obj is None:
       alert("Select Usage Type")
@@ -164,6 +171,7 @@ class Logbook(LogbookTemplate):
       self.text_box_odometer.text=""
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
+      self.total_km_value_show()
 
  
   
