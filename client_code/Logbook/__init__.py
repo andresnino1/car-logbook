@@ -43,13 +43,13 @@ class Logbook(LogbookTemplate):
     self.text_box_personal_km.text = personal_km
     self.text_box_work_km.text = work_km
     odometer = self.text_box_odometer.text
-    total_km = self.
+    total_km = self.total_km_value.text
     if odometer == "":
       self.text_box_odometer.border_color="red"
     elif odometer < 0:
       alert("Enter Just Positive Values")
-    # elif odometer < total_km :
-    #   alert("Check Odometer Value")
+    elif odometer <= total_km :
+      self.text_box_odometer.border_color="red"
     #   # self.dropdown_usage_type.placeholder="Select Usage Type"
 
       
@@ -65,17 +65,19 @@ class Logbook(LogbookTemplate):
   def dropdown_usage_type_change(self, **event_args):
     global personal_km
     global work_km
+    total_km = self.total_km_value.text
+    odometer = self.text_box_odometer.text
     usage_type_obj = self.dropdown_usage_type.selected_value
     usage_type = usage_type_obj['usage_type']
     if usage_type == 'Mix':
       self.column_panel_usage_type.visible=True
     if usage_type == "Personal":
-      personal_km = self.text_box_odometer.text
+      personal_km = odometer - total_km
       work_km = 0
       self.column_panel_usage_type.visible=False
     if usage_type == "Business":
       personal_km = 0
-      work_km = self.text_box_odometer.text
+      work_km = odometer - total_km
       self.column_panel_usage_type.visible=False
   
   # evaluate when personal kms changes and calculate work kmts
@@ -83,12 +85,14 @@ class Logbook(LogbookTemplate):
     global personal_km
     global work_km
     self.text_box_personal_km.border_color="black"
-    odometer = self.text_box_odometer.text
+    odometer = self.text_box_odometer.text # current odometer lecture
+    total_km = self.total_km_value.text # initial total kms
+    km_trip = odometer - total_km # kms of the trip
     personal_km = self.text_box_personal_km.text
     self.text_box_work_km.text = ""
     if personal_km == "":
       self.text_box_personal_km.border_color="red"
-    elif personal_km > odometer:
+    elif personal_km > km_trip:
       alert("Check Odometer Value", title="Wrong Value")
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
@@ -101,7 +105,7 @@ class Logbook(LogbookTemplate):
       personal_km = ""
       work_km = ""
     else:
-      work_km = odometer - personal_km
+      work_km = km_trip - personal_km  # work related kms is the trip kms - personal kms
       self.text_box_work_km.text = work_km
       
 
@@ -110,13 +114,15 @@ class Logbook(LogbookTemplate):
     global personal_km
     global work_km
     self.text_box_work_km.border_color="black"
-    odometer = self.text_box_odometer.text
+    odometer = self.text_box_odometer.text # current odometer lecture
+    total_km = self.total_km_value.text # initial total kms
+    km_trip = odometer - total_km # kms of the trip
     work_km = self.text_box_work_km.text
     self.text_box_personal_km.text = ""
 
     if work_km == "":
       self.text_box_work_km.border_color="red"
-    elif work_km > odometer:
+    elif work_km > km_trip:
       alert("Check Odometer Value", title="Wrong Value")
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
@@ -129,7 +135,7 @@ class Logbook(LogbookTemplate):
       personal_km = ""
       work_km = ""
     else:
-      personal_km = odometer - work_km
+      personal_km = km_trip - work_km
       self.text_box_personal_km.text = personal_km
 
   # Send Button - add register to database
@@ -148,7 +154,7 @@ class Logbook(LogbookTemplate):
     elif odometer == "":
       alert("Enter Odometer Value")
 
-    elif odometer < total_km:
+    elif odometer <= total_km:
       alert("Check Odometer Value")
 
     elif usage_type_obj is None:
