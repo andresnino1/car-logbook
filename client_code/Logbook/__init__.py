@@ -93,7 +93,7 @@ class Logbook(LogbookTemplate):
     if personal_km == "":
       self.text_box_personal_km.border_color="red"
     elif personal_km > km_trip:
-      alert("Check Odometer Value", title="Wrong Value")
+      alert("Value is higher than your total trip distance", title="Wrong Value")
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
       personal_km = ""
@@ -123,7 +123,7 @@ class Logbook(LogbookTemplate):
     if work_km == "":
       self.text_box_work_km.border_color="red"
     elif work_km > km_trip:
-      alert("Check Odometer Value", title="Wrong Value")
+      alert("Value is higher than your total trip distance", title="Wrong Value")
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
       personal_km = ""
