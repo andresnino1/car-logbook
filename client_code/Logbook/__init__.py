@@ -25,7 +25,9 @@ class Logbook(LogbookTemplate):
   #   self.dropdown_machine_type.placeholder="Select a Machine Model"
 
 # ========= TODO ================
-# cuando registre el odometro refrescar el valor suma total en total kms
+  # chequear error cuando selecciono typo de trip mix y luego lo paso a personal y luego nuevamente a mix
+  # TypeError: unsupported operand type(s) for -: 'str' and 'int'
+# at Logbook, line 75
 
   # Calculate Total Kms calling Server and show value in the main card
   def total_km_value_show(self, **event_args):

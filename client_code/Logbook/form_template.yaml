@@ -111,5 +111,5 @@ components_by_slot:
 is_package: true
 layout:
   form_event_bindings: {}
-  properties: {background_color: '', navigation_rail_collapse_to: bottom_app_bar, navigation_rail_color: '', navigation_rail_vertical_align: top, show_sidesheet: false, text_color: ''}
+  properties: {background_color: '', navigation_rail_collapse_to: modal_navigation_drawer, navigation_rail_color: '', navigation_rail_vertical_align: top, show_sidesheet: false, text_color: ''}
   type: form:dep_lin1x4oec0ytd:Layouts.NavigationRailLayout
