@@ -16,18 +16,8 @@ class Logbook(LogbookTemplate):
     self.column_panel_usage_type.visible=False
 
 
-  # # ================ DropDown Machine Type Show Function ==================
-
-  # def dropdown_machine_type_show(self, **event_args):
-  #   """This method is called when the DropDown is shown on the screen"""
-  #   self.dropdown_machine_type.items = [(r["model"],r) for r in app_tables.machine_type.search()]
-  #   self.dropdown_machine_type.include_placeholder=True
-  #   self.dropdown_machine_type.placeholder="Select a Machine Model"
-
 # ========= TODO ================
-  # chequear error cuando selecciono typo de trip mix y luego lo paso a personal y luego nuevamente a mix
-  # TypeError: unsupported operand type(s) for -: 'str' and 'int'
-# at Logbook, line 75
+# ===============================
 
   # Calculate Total Kms calling Server and show value in the main card
   def total_km_value_show(self, **event_args):
@@ -35,7 +25,10 @@ class Logbook(LogbookTemplate):
     total_kms=anvil.server.call('total_kms')
     self.total_km_value.text = total_kms
 
-  # When odometer value change the personal km and work km is empty
+  # When odometer value changes the personal km and work km is empty
+  # When odometer value changes the border goes red color if the value is empty
+  # The odometer value shouldn't be negative
+  # The odometer value shouldn't be greater that todal KMS
   def text_box_odometer_change(self, **event_args):
     global personal_km
     global work_km
@@ -48,11 +41,33 @@ class Logbook(LogbookTemplate):
     total_km = self.total_km_value.text
     if odometer == "":
       self.text_box_odometer.border_color="red"
+      self.dropdown_usage_type.include_placeholder=True # if odometer is cero - the dropdown is disabled
+      self.dropdown_usage_type.selected_value=None
+      self.dropdown_usage_type.placeholder="Select Usage Type"
+      self.dropdown_usage_type.enabled=False
+      self.text_box_personal_km.enabled=False
+      self.text_box_work_km.enabled=False
     elif odometer < 0:
       alert("Enter Just Positive Values")
+      self.dropdown_usage_type.include_placeholder=True # if odometer is negative the dropdown is disabled
+      self.dropdown_usage_type.selected_value=None
+      self.dropdown_usage_type.placeholder="Select Usage Type"
+      self.dropdown_usage_type.enabled=False
+      self.text_box_personal_km.enabled=False
+      self.text_box_work_km.enabled=False
+      
     elif odometer <= total_km :
       self.text_box_odometer.border_color="red"
-    #   # self.dropdown_usage_type.placeholder="Select Usage Type"
+      self.dropdown_usage_type.include_placeholder=True # if the odometer is below the total km the dropdown is disabled
+      self.dropdown_usage_type.selected_value=None
+      self.dropdown_usage_type.placeholder="Select Usage Type"
+      self.dropdown_usage_type.enabled=False
+      self.text_box_personal_km.enabled=False
+      self.text_box_work_km.enabled=False
+    else:
+      self.dropdown_usage_type.enabled=True
+      self.text_box_personal_km.enabled=True
+      self.text_box_work_km.enabled=True
 
       
     
@@ -137,7 +152,7 @@ class Logbook(LogbookTemplate):
       personal_km = ""
       work_km = ""
     else:
-      personal_km = km_trip - work_km
+      personal_km = km_trip - work_km # personal related kms is the trip kms - work kms
       self.text_box_personal_km.text = personal_km
 
   # Send Button - add register to database
@@ -171,14 +186,18 @@ class Logbook(LogbookTemplate):
     else:
       date_format = date.strftime("%d/%m/%Y")
       usage_type=usage_type_obj["usage_type"]
-      anvil.server.call('register_trip',date_format,odometer,usage_type, personal_km,work_km)
-      alert("Kmts Registered Successfully", title="Trip Registered")
+      response_register_trip=anvil.server.call('register_trip',date_format,odometer,usage_type, personal_km,work_km)
+      alert(response_register_trip, title="Trip Registered")
       personal_km = 0
       work_km = 0
       odometer = 0
       self.text_box_odometer.text=""
       self.text_box_personal_km.text=""
       self.text_box_work_km.text=""
+      self.dropdown_usage_type.include_placeholder=True
+      self.dropdown_usage_type.selected_value=None
+      self.dropdown_usage_type.placeholder="Select Usage Type"
+      self.column_panel_usage_type.visible=False
       self.total_km_value_show()
 
  

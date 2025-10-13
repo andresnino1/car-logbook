@@ -30,7 +30,7 @@ def register_trip(date_string, odometer, usage_type, personal_km, work_km):
   elif usage_type=="Personal":
     odometer_start = sum(row['total_distance'] for row in app_tables.logbook.search())
     app_tables.logbook.add_row(date_end=date,odometer_start=odometer_start, odometer_end=odometer,usage_type=usage_personal, total_distance=personal_km )
-  print("registere successfully")
+  return("Kmts Registered Successfully!")
   
 @anvil.server.callable
 def total_kms():
