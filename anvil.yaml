@@ -22,6 +22,9 @@ db_schema:
     - admin_ui: {order: 5, width: 200}
       name: total_distance
       type: number
+    - admin_ui: {order: 4.5, width: 200}
+      name: usage_type_text
+      type: string
     server: full
     title: logbook
   usage_type:
@@ -37,6 +40,7 @@ dependencies:
   dep_id: dep_lin1x4oec0ytd
   resolution_hints: {app_id: 4UK6WHQ6UX7AKELK, name: Material 3 Theme, package_name: m3}
   version: {version_tag: v1.2.6}
+metadata: {description: Log Book - Register Your Kmts, logo_img: 'asset:logbook_logo.png', title: LogBook}
 name: Car Logbook
 native_deps: null
 package_name: Car_Logbook
@@ -47,7 +51,7 @@ runtime_options:
   version: 3
 services:
 - client_config: {}
-  server_config: {}
+  server_config: {auto_create_missing_columns: false}
   source: /runtime/services/tables.yml
 startup: {module: Logbook, type: form}
 startup_form: null
