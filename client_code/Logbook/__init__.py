@@ -14,6 +14,9 @@ class Logbook(LogbookTemplate):
     # Set Form properties and Data Bindings.
     self.init_components(**properties)
     self.column_panel_usage_type.visible=False
+    self.dropdown_usage_type.enabled=False # dropdown is disable at start the app
+    self.text_box_personal_km.enabled=False # personal km input disable at start the app
+    self.text_box_work_km.enabled=False # work km input disable at start the app
 
 
 # ========= TODO ================
@@ -40,7 +43,10 @@ class Logbook(LogbookTemplate):
     self.text_box_personal_km.text = personal_km
     self.text_box_work_km.text = work_km
     odometer = self.text_box_odometer.text
-    total_km = self.total_km_value.text
+    total_km = self.total_km_value.text 
+    self.dropdown_usage_type.enabled=False # dropdown is disable untill Odometer has right value
+    self.text_box_personal_km.enabled=False # personal km input disable until odometer has right value
+    self.text_box_work_km.enabled=False # work km input disable until odometer has right value
     if odometer == "":
       self.text_box_odometer.border_color="red"
       self.dropdown_usage_type.include_placeholder=True # if odometer is cero - the dropdown is disabled
