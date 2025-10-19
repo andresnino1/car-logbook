@@ -8,6 +8,7 @@ import m3.components as m3
 
 personal_km = ""
 work_km = ""
+km_trip = 0
 
 class Logbook(LogbookTemplate):
   def __init__(self, **properties):
@@ -17,7 +18,7 @@ class Logbook(LogbookTemplate):
     self.dropdown_usage_type.enabled=False # dropdown is disable at start the app
     self.text_box_personal_km.enabled=False # personal km input disable at start the app
     self.text_box_work_km.enabled=False # work km input disable at start the app
-
+    self.km_trip.text = "Trip: " + str(km_trip)
 
 # ========= TODO ================
   # fix the error, when select usage type without enter odometer
@@ -30,6 +31,11 @@ class Logbook(LogbookTemplate):
     total_kms=anvil.server.call('total_kms')
     self.total_km_value.text = total_kms
 
+  def km_trip_show(self, **event_args):
+    global km_trip
+    self.km_trip.text = "Trip: " + str(km_trip)
+
+  
   # When odometer value changes the personal km and work km is empty
   # When odometer value changes the border goes red color if the value is empty
   # The odometer value shouldn't be negative
@@ -37,13 +43,16 @@ class Logbook(LogbookTemplate):
   def text_box_odometer_change(self, **event_args):
     global personal_km
     global work_km
+    global km_trip
     personal_km = ""
     work_km = ""
+    km_trip = 0
     self.text_box_odometer.border_color="black"
     self.text_box_personal_km.text = personal_km
     self.text_box_work_km.text = work_km
     odometer = self.text_box_odometer.text
-    total_km = self.total_km_value.text 
+    total_km = self.total_km_value.text
+    self.km_trip.text = "Trip: "
     self.dropdown_usage_type.enabled=False # dropdown is disable untill Odometer has right value
     self.text_box_personal_km.enabled=False # personal km input disable until odometer has right value
     self.text_box_work_km.enabled=False # work km input disable until odometer has right value
@@ -63,7 +72,6 @@ class Logbook(LogbookTemplate):
       self.dropdown_usage_type.enabled=False
       self.text_box_personal_km.enabled=False
       self.text_box_work_km.enabled=False
-      
     elif odometer <= total_km :
       self.text_box_odometer.border_color="red"
       self.dropdown_usage_type.include_placeholder=True # if the odometer is below the total km the dropdown is disabled
@@ -76,6 +84,8 @@ class Logbook(LogbookTemplate):
       self.dropdown_usage_type.enabled=True
       self.text_box_personal_km.enabled=True
       self.text_box_work_km.enabled=True
+      km_trip = odometer - total_km
+      self.km_trip.text="Trip: " + str(km_trip)
 
       
     
@@ -109,6 +119,7 @@ class Logbook(LogbookTemplate):
   def text_box_personal_km_change(self, **event_args):
     global personal_km
     global work_km
+    global km_trip
     self.text_box_personal_km.border_color="black"
     odometer = self.text_box_odometer.text # current odometer lecture
     total_km = self.total_km_value.text # initial total kms
@@ -138,6 +149,7 @@ class Logbook(LogbookTemplate):
   def text_box_work_km_change(self, **event_args):
     global personal_km
     global work_km
+    global km_trip
     self.text_box_work_km.border_color="black"
     odometer = self.text_box_odometer.text # current odometer lecture
     total_km = self.total_km_value.text # initial total kms
@@ -172,6 +184,7 @@ class Logbook(LogbookTemplate):
     usage_type_obj = self.dropdown_usage_type.selected_value
     global personal_km
     global work_km 
+    global km_trip
     
     if date is None:
       alert("Choose a Date")
@@ -199,14 +212,18 @@ class Logbook(LogbookTemplate):
       personal_km = 0
       work_km = 0
       odometer = 0
-      self.text_box_odometer.text=""
-      self.text_box_personal_km.text=""
-      self.text_box_work_km.text=""
-      self.dropdown_usage_type.include_placeholder=True
-      self.dropdown_usage_type.selected_value=None
-      self.dropdown_usage_type.placeholder="Select Usage Type"
-      self.column_panel_usage_type.visible=False
-      self.total_km_value_show()
+      km_trip = 0
+      # self.text_box_odometer.text=""
+      # self.text_box_personal_km.text=""
+      # self.text_box_work_km.text=""
+      # self.dropdown_usage_type.include_placeholder=True
+      # self.dropdown_usage_type.selected_value=None
+      # self.dropdown_usage_type.placeholder="Select Usage Type"
+      # self.column_panel_usage_type.visible=False
+      # self.total_km_value_show()
+      open_form("Logbook")
+
+
 
  
   

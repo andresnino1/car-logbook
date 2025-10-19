@@ -16,6 +16,11 @@ components_by_slot:
           name: total_km_value
           properties: {align: center}
           type: form:dep_lin1x4oec0ytd:_Components.Heading
+        - event_bindings: {show: km_trip_show}
+          layout_properties: {slot: card-content-container-slot}
+          name: km_trip
+          properties: {align: center, text_color: 'theme:Primary'}
+          type: form:dep_lin1x4oec0ytd:_Components.Text
         layout_properties: {slot: card-content-slot}
         name: card_content_container_1
         properties: {}
