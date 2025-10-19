@@ -18,7 +18,7 @@ class Logbook(LogbookTemplate):
 
 # ========= TODO ================
   # fix the error, when select usage type without enter odometer
-  # dropdown usage type should be desable when show and when odoemter is not enter
+  # dropdown usage type should be desable when show and when odoemter is not enter 
 # ===============================
 
   # Calculate Total Kms calling Server and show value in the main card
