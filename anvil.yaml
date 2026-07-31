@@ -15,7 +15,8 @@ db_schema:
     - admin_ui: {width: 200}
       name: odometer_end
       type: number
-    - admin_ui: {width: 200}
+    - admin_ui: {order: 6, width: 200}
+      client_hidden: false
       name: usage_type
       target: usage_type
       type: link_single
@@ -25,6 +26,7 @@ db_schema:
     - admin_ui: {order: 4.5, width: 200}
       name: usage_type_text
       type: string
+    indexes: []
     server: full
     title: logbook
   usage_type:
